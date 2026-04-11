@@ -11,10 +11,24 @@ const messages = [
   }
 ];
 
+// helper function
+function formatDate(date){
+  return date.toLocaleDateString("en-GB", {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+  });
+};
+
 
 function getIndex(req, res, next){
     try{
-        res.render("index", { title: "Mini Messageboard" ,messages: messages});
+        const formattedMessages = messages.map(m => ({
+          ...m, formattedDate: formatDate(m.added)
+        }));
+        res.render("index", { title: "Mini Messageboard" ,messages: formattedMessages});
     }
     catch(err){
         next(err);
@@ -57,7 +71,11 @@ function getMessage(req, res, next){
     if (!message) {
       throw new Error("Message not found");
     }
-    res.render("messages", { title: "Message Details", message });
+    const formattedMessage = {
+      ...message,
+      formattedDate: formatDate(message.added)
+    }
+    res.render("messages", { title: "Message Details", message: formattedMessage });
   }
   catch(err){
     err.status = 404; // Not Found

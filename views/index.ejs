@@ -7,7 +7,7 @@
                     <li>
                         <p>User: <%= message.user %></p>
                         <p>Message: <%= message.text %></p>
-                        <p>Time: <%= message.added %></p>
+                        <p>Time: <%= message.formattedDate %></p>
                         <a href="/messages/<%= messages.indexOf(message) %>">Open</a>
                     </li>
                 <% }) %>

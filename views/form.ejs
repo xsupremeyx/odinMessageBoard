@@ -1,9 +1,12 @@
 <%- include("partials/header", {title: "Message Form"}) %>
-<form method="post" action="/new">
-    <label for="author" class="form-label">Author</label>
-    <input type="text" class="form-control" id="author" name="author" required>
-    <label for="message" class="form-label">Message</label>
-    <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+<div class="page-container">
+    <h1>New Message</h1>
+    <form method="post" action="/new">
+        <label for="author" class="form-label">Author</label>
+        <input type="text" class="form-control" id="author" name="author" required>
+        <label for="message" class="form-label">Message</label>
+        <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
 <%- include("partials/footer") %>
