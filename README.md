@@ -2,7 +2,9 @@
 
 A simple message board web app built with Node.js, Express, and EJS — part of [The Odin Project](https://www.theodinproject.com/) Node.js curriculum.
 
-**Live demo:** [link](#)
+
+**Live demo:** [link](#https://odin-messageboard-z96l.onrender.com/)
+Note: live demo will take time on first load due to Render's free tier cold start, but subsequent loads should be faster.
 
 ---
 
