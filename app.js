@@ -32,7 +32,11 @@ app.use((req, res, next) => {
 // final error handler
 app.use((err, req, res, next) => {
     res.status(err.status || 500);
-    res.send(`${err.status || 500 } - ${err.message}`); // fallback error message for now
+    res.render("error", {
+        title: "Error",
+        status: err.status || 500,
+        message: err.message || "Internal Server Error",
+    })
 })
 
 

@@ -1,0 +1,14 @@
+<%- include("partials/header", {title: title}) %>
+<div class="page-container">
+        <h1><%= title %></h1>
+        <div class="error-board">
+            <ul>
+                    <li>
+                        <p>Status: <%= status %></p>
+                        <p>Error: <%= message %></p>
+                        <a href="/">Back to Message Board</a>
+                    </li>
+            </ul>
+        </div>
+</div>
+<%- include("partials/footer") %>
