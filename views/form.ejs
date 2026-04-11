@@ -1,3 +1,4 @@
+<%- include("partials/header", {title: "Message Form"}) %>
 <form method="post" action="/new">
     <label for="author" class="form-label">Author</label>
     <input type="text" class="form-control" id="author" name="author" required>
@@ -5,3 +6,4 @@
     <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+<%- include("partials/footer") %>
