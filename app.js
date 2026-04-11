@@ -15,8 +15,10 @@ app.use(express.urlencoded({extended: true}));
 // routes imports
 const indexRouter = require("./routes/indexRouter")
 const newRouter = require("./routes/newRouter")
+const messagesRouter = require("./routes/messagesRouter")
 
 // routes use
+app.use("/messages", messagesRouter);
 app.use("/new", newRouter);
 app.use("/", indexRouter);
 

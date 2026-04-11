@@ -8,6 +8,7 @@
                         <p>User: <%= message.user %></p>
                         <p>Message: <%= message.text %></p>
                         <p>Time: <%= message.added %></p>
+                        <a href="/messages/<%= messages.indexOf(message) %>">Open</a>
                     </li>
                 <% }) %>
             </ul>

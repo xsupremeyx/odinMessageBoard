@@ -50,8 +50,24 @@ function createMessage(req,res,next){
   }
 }
 
+function getMessage(req, res, next){
+  const { id } = req.params;
+  try {
+    const message = messages[id];
+    if (!message) {
+      throw new Error("Message not found");
+    }
+    res.render("messages", { title: "Message Details", message });
+  }
+  catch(err){
+    err.status = 404; // Not Found
+    next(err);
+  }
+}
+
 module.exports = {
     getIndex,
     getForm,
     createMessage,
+    getMessage,
 }
