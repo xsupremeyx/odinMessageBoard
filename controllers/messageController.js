@@ -21,6 +21,37 @@ function getIndex(req, res, next){
     }
 }
 
+function getForm(req, res, next){
+    try{
+        res.render("form");
+    }
+    catch(err){
+        next(err);
+    }
+}
+
+function createMessage(req,res,next){
+  const { author, message } = req.body;
+  try {
+    if (!author || !message) {
+      throw new Error("Author and message are required");
+    }
+    const newMessage = {
+      text: message,
+      user: author,
+      added: new Date()
+    };
+    messages.push(newMessage);
+    res.redirect("/");
+  }
+  catch(err){
+    err.status = 400; // Bad Request
+    next(err);
+  }
+}
+
 module.exports = {
     getIndex,
+    getForm,
+    createMessage,
 }

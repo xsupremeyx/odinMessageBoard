@@ -2,23 +2,11 @@ const { Router } = require('express');
 
 const newRouter = Router();
 
-newRouter.get("/", (req, res, next) => {
-    try{
-        res.render("form");
-    }
-    catch(err){
-        next(err);
-    }
-})
+// import controllers
+const  messageController = require("../controllers/messageController")
 
-newRouter.post("/", (req, res, next) => {
-    try{
-        console.log(req.body);
-        res.send("Message received");
-    }
-    catch(err){
-        next(err);
-    }
-})
+newRouter.get("/", messageController.getForm);
+
+newRouter.post("/", messageController.createMessage);
 
 module.exports = newRouter;
