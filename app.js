@@ -35,7 +35,7 @@ app.use((err, req, res, next) => {
     res.send(`${err.status || 500 } - ${err.message}`); // fallback error message for now
 })
 
-PATH = 3000
+const PATH = process.env.PORT || 3000;
 app.listen(PATH, (err) => {
     if(err){
         console.error("Error starting server:", err);
