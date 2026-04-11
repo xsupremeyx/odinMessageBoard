@@ -9,6 +9,9 @@ app.set("view engine", "ejs");
 const assetsPath = path.join(__dirname, "public");
 app.use(express.static(assetsPath));
 
+// middleware for form
+app.use(express.urlencoded({extended: true}));
+
 // routes imports
 const indexRouter = require("./routes/indexRouter")
 const newRouter = require("./routes/newRouter")

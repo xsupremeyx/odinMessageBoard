@@ -2,13 +2,9 @@ const { Router } = require('express');
 
 const indexRouter = Router();
 
-indexRouter.get("/", (req, res) => {
-    try{
-        res.render("index");
-    }
-    catch(err){
-        next(err);
-    }
-})
+// import controllers
+const  messageController = require("../controllers/messageController")
+
+indexRouter.get("/", messageController.getIndex);
 
 module.exports = indexRouter;
