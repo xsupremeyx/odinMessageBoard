@@ -26,7 +26,7 @@ function formatDate(date){
 function getIndex(req, res, next){
     try{
         const formattedMessages = messages.map(m => ({
-          ...m, formattedDate: formatDate(m.added)
+          ...m, formattedDate: formatDate(m.added), preview: m.text.length > 20 ? m.text.substring(0, 20) + "..." : m.text
         }));
         res.render("index", { title: "Mini Messageboard" ,messages: formattedMessages});
     }
@@ -73,7 +73,7 @@ function getMessage(req, res, next){
     }
     const formattedMessage = {
       ...message,
-      formattedDate: formatDate(message.added)
+      formattedDate: formatDate(message.added),
     }
     res.render("messages", { title: "Message Details", message: formattedMessage });
   }
