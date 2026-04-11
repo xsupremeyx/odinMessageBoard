@@ -317,6 +317,12 @@ form {
     border-color: var(--color-accent);
 }
 
+.form-hint {
+    font-size: 0.78rem;
+    color: var(--color-text-muted);
+    margin-top: -0.5rem;
+}
+
 .btn-primary {
     align-self: flex-end;
     padding: 0.6rem 1.5rem;

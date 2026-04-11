@@ -1,14 +1,19 @@
 const messages = [
-  {
-    text: "Hi there!",
-    user: "Amando",
-    added: new Date()
-  },
-  {
-    text: "Hello World!",
-    user: "Charles",
-    added: new Date()
-  }
+    {
+        text: "Click any card! Welcome to Mini Messageboard, click any card to read the full message.",
+        user: "Yash",
+        added: new Date()
+    },
+    {
+        text: "    How to post! Click 'New Message' in the navbar. Fill in your name and message, then hit Submit!",
+        user: "Yash",
+        added: new Date()
+    },
+    {
+        text: "   Example Title!  The first 20 characters become your preview title on the board — so make them count!",
+        user: "Example User",
+        added: new Date()
+    }
 ];
 
 // helper function
@@ -28,7 +33,7 @@ function formatDate(date){
 function getIndex(req, res, next){
     try{
         const formattedMessages = messages.map(m => ({
-          ...m, formattedDate: formatDate(m.added), preview: m.text.length > 20 ? m.text.substring(0, 20) + "..." : m.text
+          ...m, formattedDate: formatDate(m.added), preview: m.text.length > 20 ? m.text.substring(0, m.text.lastIndexOf(' ', 20)) + "..." : m.text
         }));
         res.render("index", { title: "Mini Messageboard" ,messages: formattedMessages});
     }
