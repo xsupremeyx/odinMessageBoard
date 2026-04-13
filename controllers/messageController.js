@@ -1,19 +1,13 @@
-const messages = [
-    {
-        text: "Click any card! Welcome to Mini Messageboard, click any card to read the full message.",
-        user: "Yash",
-        added: new Date()
-    },
-    {
-        text: "    How to post! Click 'New Message' in the navbar. Fill in your name and message, then hit Submit!",
-        user: "Yash",
-        added: new Date()
-    },
-    {
-        text: "   Example Title!  The first 20 characters become your preview title on the board — so make them count!",
-        user: "Example User",
-        added: new Date()
-    }
+const db = require("../db/queries");
+const { body, validationResult, matchedData } = require("express-validator");
+const validateMessage = [
+    body("author")
+        .trim()
+        .isLength({ min: 1, max: 50 }).withMessage("Name must be between 1 and 50 characters")
+        .matches(/^[a-zA-Z ]+$/).withMessage("Name must only contain letters and spaces"),
+    body("message")
+        .trim()
+        .isLength({ min: 1, max: 500 }).withMessage("Message must be between 1 and 500 characters"),
 ];
 
 // helper function
@@ -30,8 +24,9 @@ function formatDate(date){
 };
 
 
-function getIndex(req, res, next){
+async function getIndex(req, res, next){
     try{
+      const messages = await db.getAllMessages();
         const formattedMessages = messages.map(m => ({
           ...m, formattedDate: formatDate(m.added), preview: m.text.length > 20 ? m.text.substring(0, m.text.lastIndexOf(' ', 20)) + "..." : m.text
         }));
@@ -42,39 +37,46 @@ function getIndex(req, res, next){
     }
 }
 
-function getForm(req, res, next){
+async function getForm(req, res, next){
     try{
-        res.render("form");
+        res.render("form", {
+          errors: [],
+          data: {},
+          title: "New Message",
+        });
     }
     catch(err){
         next(err);
     }
 }
 
-function createMessage(req,res,next){
-  const { author, message } = req.body;
-  try {
-    if (!author || !message) {
-      throw new Error("Author and message are required");
+const createMessage = [
+  validateMessage,
+  async (req,res,next) => {
+    try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(400).render("form", {
+          errors: errors.array(),
+          data: req.body,
+          // title: "Message Error",
+        });
+      }
+      const {author, message} = matchedData(req);
+      await db.insertMessage(author, message);
+      res.redirect("/");
     }
-    const newMessage = {
-      text: message,
-      user: author,
-      added: new Date()
-    };
-    messages.push(newMessage);
-    res.redirect("/");
+    catch(err){
+      err.status = 400; // Bad Request
+      next(err);
+    }
   }
-  catch(err){
-    err.status = 400; // Bad Request
-    next(err);
-  }
-}
+];
 
-function getMessage(req, res, next){
+async function getMessage(req, res, next){
   const { id } = req.params;
   try {
-    const message = messages[id];
+    const message = await db.getMessage(id);
     if (!message) {
       throw new Error("Message not found");
     }
