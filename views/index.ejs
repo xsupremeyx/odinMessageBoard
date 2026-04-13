@@ -5,9 +5,9 @@
             <ul>
                 <% messages.forEach(message => { %>
                     <li>
-                        <p>User: <%= message.user %></p>
+                        <p>User: <%= message.username %></p>
                         <p><%= message.preview %></p>
-                        <a href="/messages/<%= messages.indexOf(message) %>" class="card-link"></a>
+                        <a href="/messages/<%= message.id %>" class="card-link"></a>
                     </li>
                 <% }) %>
             </ul>

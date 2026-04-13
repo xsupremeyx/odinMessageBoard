@@ -59,7 +59,7 @@ const createMessage = [
         return res.status(400).render("form", {
           errors: errors.array(),
           data: req.body,
-          // title: "Message Error",
+          title: "New Message",
         });
       }
       const {author, message} = matchedData(req);

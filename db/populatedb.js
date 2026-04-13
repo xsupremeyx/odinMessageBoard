@@ -7,12 +7,12 @@ const URL = process.argv[2] || `postgresql://${process.env.DATABASE_USER}:${proc
 const SQL = `
 CREATE TABLE IF NOT EXISTS messages (
   id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  userName VARCHAR ( 50 ) NOT NULL,
+  username VARCHAR ( 50 ) NOT NULL,
   text VARCHAR ( 500 ),
   added TIMESTAMP DEFAULT NOW()
 );
 
-INSERT INTO messages (userName, text) 
+INSERT INTO messages (username, text) 
 VALUES
   ('Yash','Click any card! Welcome to Mini Messageboard, click any card to read the full message.'),
   ('Yash','    How to post! Click ''New Message'' in the navbar. Fill in your name and message, then hit Submit!'),

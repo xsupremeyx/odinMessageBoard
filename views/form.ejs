@@ -1,11 +1,12 @@
 <%- include("partials/header", {title: "Message Form"}) %>
 <div class="page-container">
     <h1>New Message</h1>
+    <%- include("partials/error") %>
     <form method="post" action="/new">
         <label for="author" class="form-label">Author</label>
-        <input type="text" class="form-control" id="author" name="author" required>
+        <input type="text" class="form-control" id="author" name="author" value="<%= data.author || '' %>" required>
         <label for="message" class="form-label">Message</label>
-        <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
+        <textarea class="form-control" id="message" name="message" rows="4" required><%= data.message || '' %></textarea>
         <p class="form-hint">First 20 characters will be shown as preview on the board.</p>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
