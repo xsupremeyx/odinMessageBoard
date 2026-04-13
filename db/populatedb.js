@@ -2,7 +2,7 @@
 
 const { Client } = require("pg");
 require("dotenv").config();
-const URL = process.argv[2] || `postgresql://${process.env.DATABASE_USER}:${process.env.DATABASE_PASSWORD}@${process.env.DATABASE_HOST}:${process.env.DATABASE_PORT}/${process.env.DATABASE_NAME}`;
+const URL = process.argv[2] || process.env.DATABASE_URL;
 
 const SQL = `
 CREATE TABLE IF NOT EXISTS messages (
