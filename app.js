@@ -2,6 +2,7 @@
 const express = require("express");
 const app = express();
 const path = require("node:path");
+require("dotenv").config();
 
 // ejs and styles imports
 app.set("views", path.join(__dirname,"views"));
